@@ -1,0 +1,22 @@
+from urllib.parse import urljoin
+import requests
+from bs4 import BeautifulSoup as bs
+
+
+url = 'https://www.wikipedia.org/'
+
+response = requests.get(url)
+html_text = response.text
+soup = bs(html_text, 'html.parser')
+
+url_links = []
+for anchor in soup.find_all('a', href=True):
+    url_link = urljoin(url, anchor['href'])
+    url_links.append(url_link)
+    
+
+print('>>>>>>>>>>>>>>>>>>>>>>>>>>>')
+for url_link in url_links:
+    print(url_link)
+
+손유나 강혜인 좋아함
